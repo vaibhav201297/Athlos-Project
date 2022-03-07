@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "api for athlos project",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "npm install --prefix athlos-api && npm run build --prefix athlos-api",
     "start": "cross-env NODE_ENV=production node app",
