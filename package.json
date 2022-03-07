@@ -7,18 +7,15 @@
     "node": "16.x"
   },
   "scripts": {
-    "build": "npm install --prefix athlos-api && npm run build --prefix athlos-api",
-    "start": "cross-env NODE_ENV=production node app",
+    "build": "npm install",
+    "start": "NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.iu.edu:vavish/SoftwareEngineering.git"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "npm":"16.3.1",
     "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
