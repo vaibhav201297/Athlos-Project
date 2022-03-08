@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./RegistrationModal.module.css";
 import "./RegistrationModal.css";
+const dotenv = require('dotenv');
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLoginButton } from "..";
 
@@ -11,6 +12,7 @@ class RegistrationModal extends Component {
   };
 
   onSignUp = (event) => {
+    const api_url=process.env.API
     var newUserData = {
       firstName: event.target.fname.value,
       lastName: event.target.lname.value,
@@ -19,7 +21,7 @@ class RegistrationModal extends Component {
     };
     console.log(newUserData);
 
-    fetch("http://localhost:5000/api/add", {
+    fetch(api_url+"/api", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
