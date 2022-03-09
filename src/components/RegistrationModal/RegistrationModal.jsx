@@ -11,7 +11,6 @@ class RegistrationModal extends Component {
   };
 
   onSignUp = (event) => {
-    const api_url=process.env.API
     var newUserData = {
       firstName: event.target.fname.value,
       lastName: event.target.lname.value,
@@ -20,12 +19,12 @@ class RegistrationModal extends Component {
     };
     console.log(newUserData);
 
-    fetch(process.env.API_URL+"/api", {
-      method: "POST", // or 'PUT'
+    fetch("http://localhost:3000/api/add", {
+      method: "post", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newUserData),
+      body: newUserData,
     })
       .then((response) => response.json())
       .then((newUserData) => {
@@ -94,6 +93,7 @@ class RegistrationModal extends Component {
                       id="login-form"
                       className={styles.slideInRight}
                       onSubmit={this.props.onLogin}
+                      method="POST"
                     >
                       <div className={styles.inputContainer}>
                         <label for="username">Email</label>
@@ -135,7 +135,7 @@ class RegistrationModal extends Component {
                 </label> */}
 
                       <button
-                        type="submit"
+                        type="button"
                         className={[
                           styles.button,
                           styles.buttonPrimary,
@@ -160,6 +160,7 @@ class RegistrationModal extends Component {
                     id="signup-form"
                     className={styles.slideInLeft}
                     onSubmit={this.onSignUp}
+                    method="post"
                   >
                     <div className={styles.nameContainer}>
                       <div
@@ -262,16 +263,17 @@ class RegistrationModal extends Component {
                 Remember Me
               </label> */}
 
-                    <button
+                    <input
                       type="submit"
+                      value="  Sign Up"
                       className={[
                         styles.button,
                         styles.buttonPrimary,
                         styles.buttonSubmit,
                       ].join(" ")}
-                    >
-                      Sign Up
-                    </button>
+                    />
+                    
+                    
                   </form>
                 </div>
               ) : null}

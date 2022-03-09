@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home, Dashboard, RegistrationModal } from "./components";
-
 class App extends Component {
   state = {
-    isAuthenticated: true,
-    userFirstName: "John",
-    userLastName: "Smith",
+    isAuthenticated: false,
+    userFirstName: "",
+    userLastName: "",
     userType: "Customer", // Implemented Options: "Customer", "Manager"
     showModal: false,
     showModalLogin: false,

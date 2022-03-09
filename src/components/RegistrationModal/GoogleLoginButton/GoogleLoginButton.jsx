@@ -3,14 +3,34 @@ import { GoogleLogin } from "react-google-login";
 // import {refreshTokenSetup} from ""
 import styles from "./GoogleLoginButton.module.css";
 import "./GoogleLoginButton.css";
+import axios from 'axios'
 
 // TODO add client ID
-const clientID = "YOUR_CLIENT_ID.apps.googleusercontent.com";
+const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
+var api_url
+if (process.env.NODE_ENV === "production") {
+  api_url = process.env.REACT_APP_API_URL
+} else {
+  api_url=process.env.REACT_APP_LOCAL_URL
+}
+  
 
 function GoogleLoginButton() {
+  //console.log(clientID)
   const onSuccess = (res) => {
+    console.log(api_url)
     console.log("[Login Successful] currentUser:", res.profileObj);
-    // refreshTokenSetup(res);
+    axios({
+      method:"POST",
+      url:api_url+"/auth/google",
+      data:{tokenId:res.tokenId}
+      }).then(response=>{
+      console.log(response);
+
+    }).then(response=>{
+      console.log(response)
+    }) 
+
   };
 
   const onFailure = (res) => {
@@ -23,6 +43,7 @@ function GoogleLoginButton() {
       render={(renderProps) => (
         <button
           onClick={renderProps.onClick}
+          type="button"
           disabled={renderProps.disabled}
           className={styles.button}
         >
@@ -56,8 +77,7 @@ function GoogleLoginButton() {
       )}
       onSuccess={onSuccess}
       onFailure={onFailure}
-      cookiePolicy={"single-host-origin"}
-      isSignedIn={true}
+      isSignedIn={false}
     />
   );
 }
